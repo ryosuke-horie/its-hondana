@@ -1,0 +1,24 @@
+name: phpmd
+
+on:
+  - pull_request
+
+jobs:
+  phpmd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: Install Dependencies
+        working-directory: ./webApp
+        run: |
+          composer install -q --no-ansi --no-interaction --no-scripts --prefer-dist
+
+      - name: PHPMD Analyse
+        working-directory: ./webApp
+        run: ./vendor/bin/phpmd . text unusedcode,naming --suffixes php --exclude vendor
