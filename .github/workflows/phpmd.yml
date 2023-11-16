@@ -1,10 +1,10 @@
-name: Larastan
+name: phpmd
 
 on:
   - pull_request
 
 jobs:
-  larastan:
+  phpmd:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
